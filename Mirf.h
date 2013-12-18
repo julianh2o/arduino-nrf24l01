@@ -35,7 +35,7 @@
 // Nrf24l settings
 
 #define mirf_ADDR_LEN	5
-#define mirf_CONFIG ((1<<EN_CRC) | (0<<CRCO) )
+#define mirf_CONFIG ((1<<EN_CRC) | (1<<CRCO) )
 
 class Nrf24l {
 	public:
@@ -43,11 +43,14 @@ class Nrf24l {
 
 		void init();
 		void config();
+		void populateTx(uint8_t *value);
 		void send(uint8_t *value);
 		void setRADDR(uint8_t * adr);
 		void setTADDR(uint8_t * adr);
 		bool dataReady();
-		bool isSending();
+        void resetStatus();
+		bool isDataSent();
+		bool isMaxRetransmit();
 		bool rxFifoEmpty();
 		bool txFifoEmpty();
 		void getData(uint8_t * data);
